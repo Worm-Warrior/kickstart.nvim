@@ -87,6 +87,31 @@ P.S. You can delete this when you're done too. It's your config now! :)
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
+
+-- Define a global function to replace the visual selection
+function _G.replace_visual_selection()
+  local s_pos = vim.fn.getpos("'<")
+  local e_pos = vim.fn.getpos("'>")
+
+  local lines = vim.fn.getline(s_pos[2], e_pos[2])
+  if #lines == 1 then
+    lines[1] = string.sub(lines[1], s_pos[3], e_pos[3])
+  else
+    lines[#lines] = string.sub(lines[#lines], 1, e_pos[3])
+    lines[1] = string.sub(lines[1], s_pos[3], -1)
+  end
+
+  local search_term = vim.fn.escape(table.concat(lines, '\n'), '/\\')
+
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(':%s/' .. search_term .. '/', true, false, true), 'n', true)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<left><left>', true, false, true), 'n', true)
+end
+
+-- Map <C-r> in visual mode to call the global function
+vim.api.nvim_set_keymap('v', '<C-r>', ':lua _G.replace_visual_selection()<CR>', { noremap = true, silent = true })
+
+
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -876,7 +901,7 @@ require('lazy').setup({
   require 'kickstart.plugins.debug',
   require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
