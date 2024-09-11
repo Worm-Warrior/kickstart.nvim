@@ -90,8 +90,8 @@ P.S. You can delete this when you're done too. It's your config now! :)
 
 -- Define a global function to replace the visual selection
 function _G.replace_visual_selection()
-  local s_pos = vim.fn.getpos("'<")
-  local e_pos = vim.fn.getpos("'>")
+  local s_pos = vim.fn.getpos "'<"
+  local e_pos = vim.fn.getpos "'>"
 
   local lines = vim.fn.getline(s_pos[2], e_pos[2])
   if #lines == 1 then
@@ -109,8 +109,6 @@ end
 
 -- Map <C-r> in visual mode to call the global function
 vim.api.nvim_set_keymap('v', '<C-r>', ':lua _G.replace_visual_selection()<CR>', { noremap = true, silent = true })
-
-
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -178,6 +176,7 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
+vim.o.tabstop = 4
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
