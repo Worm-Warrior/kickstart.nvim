@@ -14,6 +14,22 @@ return {
     },
   },
   {
+    'vague2k/vague.nvim',
+    config = function()
+      require('vague').setup {
+        transparent = true,
+      }
+    end,
+  },
+  {
+    'rebelot/kanagawa.nvim',
+    config = function()
+      require('kanagawa').setup {
+        transparent = true,
+      }
+    end,
+  },
+  {
     'lervag/vimtex',
     lazy = false, -- we don't want to lazy load VimTeX
     -- tag = "v2.15", -- uncomment to pin to a specific release
