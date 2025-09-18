@@ -17,6 +17,10 @@ return {
     'alljokecake/naysayer-theme.nvim',
   },
   {
+    'catppuccin/nvim',
+    transparent_background = true,
+  },
+  {
     'lervag/vimtex',
     lazy = false, -- we don't want to lazy load VimTeX
     -- tag = "v2.15", -- uncomment to pin to a specific release

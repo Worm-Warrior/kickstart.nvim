@@ -180,11 +180,9 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 vim.o.tabstop = 4
-vim.o.guicursor = ''
-
+vim.o.guicursor = 'n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,t:block-blinkon500-blinkoff500-TermCursor'
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
-
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -801,6 +799,9 @@ require('lazy').setup({
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
           ['<C-y>'] = cmp.mapping.confirm { select = true },
+          vim.keymap.set('i', '<C-c>', '<Esc>', { noremap = true, silent = true }), -- insert mode
+          vim.keymap.set('v', '<C-c>', '<Esc>', { noremap = true, silent = true }), -- visual mode
+          vim.keymap.set('c', '<C-c>', '<Esc>', { noremap = true, silent = true }), -- command-line mode
 
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
@@ -860,7 +861,7 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'naysayer'
+      vim.cmd.colorscheme 'tokyonight-moon'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
