@@ -17,13 +17,18 @@ return {
     'alljokecake/naysayer-theme.nvim',
   },
   {
+    'ellisonleao/gruvbox.nvim',
+    priority = 1000,
+    config = true,
+  },
+  {
     'catppuccin/nvim',
     name = 'catppuccin',
     config = function()
       require('catppuccin').setup {
         transparent_background = true,
       }
-      vim.cmd.colorscheme 'catppuccin'
+      --   vim.cmd.colorscheme 'catppuccin'
     end,
   },
   {
